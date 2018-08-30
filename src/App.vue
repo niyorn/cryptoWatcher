@@ -1,22 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Crypto/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Crypto from './components/Crypto.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Crypto
   }
 }
 </script>
 
 <style lang="scss">
+@import "./variables.scss";
+
 * {
   margin: 0;
   padding: 0;
@@ -31,5 +32,9 @@ html, body{
   
 #app {
   
+}
+
+header {
+  background-color: yellow;
 }
 </style>
