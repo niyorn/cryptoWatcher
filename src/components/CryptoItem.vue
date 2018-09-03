@@ -37,6 +37,7 @@ export default {
         display: grid;
         grid-template-areas: "image price"
                              "name change";
+        grid-template-columns: 1fr 2fr;
         grid-gap: 1rem;
 
         padding: 1rem;
@@ -51,7 +52,8 @@ export default {
 
         img {
             width: 100%;
-            object-fit: cover
+            height: 7rem;
+            object-fit: contain;
         }
     }
 
@@ -71,7 +73,10 @@ export default {
         }
 
         .price {
-            font-size: 4em;
+            font-size: 1.7em;
+            @media screen and (min-width:30rem){
+                font-size: 4rem;
+            }
         }
     }
 
@@ -93,7 +98,10 @@ export default {
             }
 
             .change-percentage {
-                font-size: 2em;
+                font-size: 1em;
+                @media screen and (min-width:30rem) {
+                    font-size: 2em;
+                }
             }
         }
     }
