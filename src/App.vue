@@ -29,12 +29,4 @@ html, body{
   scroll-behavior: smooth;
   font-family: sans-serif;
 }
-  
-#app {
-  
-}
-
-header {
-  background-color: yellow;
-}
 </style>
