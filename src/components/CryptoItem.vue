@@ -33,14 +33,20 @@ export default {
 
 <style lang="scss">
     .cryptoItem {
-        background-color: lightblue;
+        background-color: var(--primary-color);
+        color: var(--text-color);
         display: grid;
         grid-template-areas: "image price"
                              "name change";
         grid-template-columns: 1fr 2fr;
         grid-gap: 1rem;
-
         padding: 1rem;
+
+        &:hover {
+            background-color: var(--hover-background-color);
+            color: black;
+            cursor: pointer;
+        }
     }
 
     .label {

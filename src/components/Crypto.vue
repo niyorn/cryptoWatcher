@@ -126,6 +126,7 @@ export default {
 <style lang="scss">
   .container {
     padding-top: 6rem;
+    background-color: var(--background-color);
   }
 
   .crypto-container {
