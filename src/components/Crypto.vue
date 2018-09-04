@@ -117,7 +117,17 @@ export default {
     CryptoItem
   },
   methods: {
-
+    fetch() {
+      let url = "https://min-api.cryptocompare.com/data/top/totalvol?limit=100&tsym=USD";
+      fetch(url)
+      .then(res => res.json())
+      .then(result => {
+        console.log(result)
+      })
+    }
+  },
+  created() {
+    this.fetch()
   }
 }
 </script>
