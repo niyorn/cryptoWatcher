@@ -1,6 +1,9 @@
 :root {
-    --primary-color: red;
-    --secondary-color: blue;
+    --primary-color: rgb(43, 46, 61);
+    --secondary-color: rgb(186, 66, 255);
+    --background-color: rgb(21, 21, 31);
+    --hover-background-color: rgb(255, 255, 116);
+    --text-color: rgb(255, 255, 255);
 
     --material-shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     --material-shadow-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
