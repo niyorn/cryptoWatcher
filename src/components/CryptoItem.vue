@@ -1,25 +1,25 @@
 <template>
     <article class="cryptoItem">
         <div class="image-container">
-            <img src="https://bestebank.r.worldssl.net/wp-content/uploads/2017/12/ethereum.png" alt="">
+            <img v-bind:src="imgUrl" alt="">
         </div> 
         <div class="name-container">
             <span class="label">name</span>
-            <h2>Ethereum</h2>
+            <h2>{{name}}</h2>
         </div>
         <div class="price-container">
             <span class="label">price</span>
-            <span class="price">$918</span>
+            <span class="price">{{price}}</span>
         </div>
         <div class="change-container">
             <div class="change change-24h">
-                <span class="label">24 hour</span>
-                <span class="change-percentage">10%</span>
-            </div>
-            
-            <div class="change change-7d">
-                <span class="label">7 days</span>
-                <span class="change-percentage">14%</span>
+                <span class="label">24h change</span>
+                <span class="change-percentage"
+                v-bind:class = "{'change':change}"
+                >   
+                    {{checkChange}}
+                    {{change}}%
+                </span>
             </div>
         </div>       
     </article>
@@ -27,7 +27,31 @@
 
 <script>
 export default {
-    name: "CryptoItem"
+    name: "CryptoItem",
+    props: {
+        name: String,
+        imgUrl: String,
+        price: String||Number,
+        change: {
+           type: String || Number,
+        }
+    },
+    data(){
+        return {
+            test: ""
+        }
+    },
+    computed: {
+        checkChange(){
+            console.log(this.change)
+            let priceD = Number(this.change);
+
+            if(priceD<0){
+                this.test=true
+            }
+        }
+    }
+
 }
 </script>
 
@@ -81,7 +105,7 @@ export default {
         .price {
             font-size: 1.7em;
             @media screen and (min-width:30rem){
-                font-size: 4rem;
+                font-size: 2.7rem;
             }
         }
     }
@@ -97,7 +121,7 @@ export default {
 
         .change {
             display: inline-block;
-            width: 50%;
+            width: 100%;
             
             span {
                 display: block;
