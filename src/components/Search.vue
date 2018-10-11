@@ -73,6 +73,10 @@
             &:hover {
                 cursor: pointer;
             }
+
+            svg {
+                height: 100%;
+            }
         }
 
         .search {
