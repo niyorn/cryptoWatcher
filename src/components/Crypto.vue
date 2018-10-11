@@ -2,106 +2,9 @@
   <main class="container">
     <Header/>
     <section class="crypto-container">
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
-      <CryptoItem></CryptoItem>
+      <CryptoItem v-for="coin in coins" :key = coin.id>
+        {{coin}}
+      </CryptoItem>
     </section>
   </main>
 </template>
@@ -116,18 +19,57 @@ export default {
     "Header" : Search,
     CryptoItem
   },
+  data() {
+    return {
+      coins: []
+    }
+  },
   methods: {
-    fetch() {
-      let url = "https://min-api.cryptocompare.com/data/top/totalvol?limit=100&tsym=USD";
+    fetchTopCoins() {
+      let url = "https://min-api.cryptocompare.com/data/top/totalvol?limit=10&tsym=USD";
       fetch(url)
       .then(res => res.json())
       .then(result => {
-        console.log(result)
+        let coin = [];
+        result.Data.forEach(i=>{
+          let coinInfo = {
+            name : i.CoinInfo.Name,
+            fullName : i.CoinInfo.FullName,
+            imageUrl : i.CoinInfo.ImageUrl
+          };
+          coin.push(coinInfo)
+        })
+
+        this.fetchPrice(coin)
       })
+    },
+    fetchPrice(data){
+      let allName = "";
+
+      data.forEach(i=>{
+        allName += `${i.name},`;
+      })
+
+      let url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${allName}&tsyms=USD`;
+      fetch(url)
+      .then(res => res.json())
+      .then(result => {
+        data.forEach((value)=> {
+          let name = value.name;
+          let priceInfo = result.DISPLAY[name].USD;
+          value.priceInfo = priceInfo;
+        })
+
+        this.coins = data;
+        // this.render(data)
+      })
+    },
+    render(data){
+      console.log(data)
     }
   },
   created() {
-    this.fetch()
+    this.fetchTopCoins()
   }
 }
 </script>
