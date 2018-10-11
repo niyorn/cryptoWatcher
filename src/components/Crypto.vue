@@ -2,8 +2,14 @@
   <main class="container">
     <Header/>
     <section class="crypto-container">
-      <CryptoItem v-for="coin in coins" :key = coin.id>
-        {{coin}}
+      <CryptoItem 
+        v-for = "coin in coins" 
+        v-bind:key = "coin.id"
+        v-bind:name = "coin.fullName"
+        v-bind:imgUrl = "`https://www.cryptocompare.com${coin.imageUrl}`"
+        v-bind:price = "coin.priceInfo.PRICE"
+        v-bind:change = "coin.priceInfo.CHANGEPCT24HOUR"
+        >
       </CryptoItem>
     </section>
   </main>
@@ -26,7 +32,7 @@ export default {
   },
   methods: {
     fetchTopCoins() {
-      let url = "https://min-api.cryptocompare.com/data/top/totalvol?limit=10&tsym=USD";
+      let url = "https://min-api.cryptocompare.com/data/top/totalvol?limit=70&tsym=USD";
       fetch(url)
       .then(res => res.json())
       .then(result => {
@@ -41,6 +47,9 @@ export default {
         })
 
         this.fetchPrice(coin)
+      })
+      .catch(err=> {
+        throw err
       })
     },
     fetchPrice(data){
@@ -59,13 +68,8 @@ export default {
           let priceInfo = result.DISPLAY[name].USD;
           value.priceInfo = priceInfo;
         })
-
         this.coins = data;
-        // this.render(data)
       })
-    },
-    render(data){
-      console.log(data)
     }
   },
   created() {
