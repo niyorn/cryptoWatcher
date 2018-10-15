@@ -2,7 +2,7 @@
     <article class="cryptoItem">
         <div class="image-container">
             <img v-bind:src="imgUrl" alt="">
-        </div> 
+        </div>
         <div class="name-container">
             <span class="label">name</span>
             <h2>{{name}}</h2>
@@ -14,45 +14,46 @@
         <div class="change-container">
             <div class="change change-24h">
                 <span class="label">24h change</span>
-                <span class="change-percentage"
-                v-bind:class = "{'change':change}"
-                >   
+                <span class="change-percentage" v-bind:class="[changeStatus]">
                     {{checkChange}}
                     {{change}}%
                 </span>
             </div>
-        </div>       
+        </div>
     </article>
 </template>
 
 <script>
-export default {
-    name: "CryptoItem",
-    props: {
-        name: String,
-        imgUrl: String,
-        price: String||Number,
-        change: {
-           type: String || Number,
-        }
-    },
-    data(){
-        return {
-            test: ""
-        }
-    },
-    computed: {
-        checkChange(){
-            console.log(this.change)
-            let priceD = Number(this.change);
+    export default {
+        name: "CryptoItem",
+        props: {
+            name: String,
+            imgUrl: String,
+            price: String || Number,
+            change: {
+                type: String || Number,
+            }
+        },
+        data() {
+            return {
+                changeStatus: ""
+            }
+        },
+        computed: {
+            checkChange() {//Check to see if the changes are positive or negative
+                let change = Number(this.change);
 
-            if(priceD<0){
-                this.test=true
+                if (change < 0) {
+                    this.changeStatus = "negative";
+                } else if (change > 0) {
+                    this.changeStatus = "positive";
+                } else {
+                    this.changeStatus = "neutral";
+                }
             }
         }
-    }
 
-}
+    }
 </script>
 
 <style lang="scss">
@@ -61,7 +62,7 @@ export default {
         color: var(--text-color);
         display: grid;
         grid-template-areas: "image price"
-                             "name change";
+            "name change";
         grid-template-columns: 1fr 2fr;
         grid-gap: 1rem;
         padding: 1rem;
@@ -104,7 +105,8 @@ export default {
 
         .price {
             font-size: 1.7em;
-            @media screen and (min-width:30rem){
+
+            @media screen and (min-width: 30rem) {
                 font-size: 2.7rem;
             }
         }
@@ -122,18 +124,30 @@ export default {
         .change {
             display: inline-block;
             width: 100%;
-            
+
             span {
                 display: block;
             }
 
             .change-percentage {
                 font-size: 1em;
-                @media screen and (min-width:30rem) {
+
+                &.positive {
+                    color: var(--positive-change);
+                }
+
+                &.negative {
+                    color: var(--negative-change);
+                }
+
+                &.neutral {
+                    color: var(--neutral-chage);
+                }
+
+                @media screen and (min-width: 30rem) {
                     font-size: 2em;
                 }
             }
         }
     }
 </style>
-
