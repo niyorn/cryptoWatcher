@@ -40,7 +40,7 @@
             }
         },
         computed: {
-            checkChange() {//Check to see if the changes are positive or negative
+            checkChange() { //Check to see if the changes are positive or negative
                 let change = Number(this.change);
 
                 if (change < 0) {
