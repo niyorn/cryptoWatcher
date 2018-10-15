@@ -23,4 +23,10 @@ localhost:8080
 ```
 
 ## Vue component flow
+
 ![Vue component Flow](readme-assets/component-flow.png)
+
+## Function flow
+
+![Actor Flow](readme-assets/actor-flow.png)
+
