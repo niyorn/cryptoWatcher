@@ -31,7 +31,7 @@ export default {
     }
   },
   methods: {
-    fetchTopCoins() {
+    fetchTopCoins() { //get top volume trading coins
       let url = "https://min-api.cryptocompare.com/data/top/totalvol?limit=70&tsym=USD";
       fetch(url)
       .then(res => res.json())
@@ -52,7 +52,7 @@ export default {
         throw err
       })
     },
-    fetchPrice(data){
+    fetchPrice(data){ //look up the price of coins
       let allName = "";
 
       data.forEach(i=>{
@@ -72,7 +72,7 @@ export default {
       })
     }
   },
-  created() {
+  created() { //fetch top coins on page load
     this.fetchTopCoins()
   }
 }
