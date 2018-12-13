@@ -2,8 +2,11 @@
   <main class="container">
     <Header />
     <section class="crypto-container">
-      <CryptoItem v-for="coin in coins" v-bind:key="coin.id" v-bind:name="coin.fullName" v-bind:imgUrl="`https://www.cryptocompare.com${coin.imageUrl}`"
-        v-bind:price="coin.priceInfo.PRICE" v-bind:change="coin.priceInfo.CHANGEPCT24HOUR">
+      <CryptoItem v-for="coin in coins" v-bind:key="coin.id" 
+        v-bind:name="coin.name" 
+        v-bind:imgUrl="coin.image"
+        v-bind:price="coin.price" 
+        v-bind:change="coin.change">
       </CryptoItem>
     </section>
   </main>
@@ -29,6 +32,10 @@
     created() { 
       //get data
       this.$store.dispatch('fetchData')
+      .then(()=>{//store data
+        const data = this.$store.state.coins
+        this.coins = data
+      })
     }
   }
 </script>
