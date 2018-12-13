@@ -25,46 +25,6 @@
       }
     },
     methods: {
-      fetchTopCoins() { //get top volume trading coins
-        let url = "https://min-api.cryptocompare.com/data/top/totalvol?limit=70&tsym=USD";
-        fetch(url)
-          .then(res => res.json())
-          .then(result => {
-            let coin = [];
-            result.Data.forEach(i => {
-              let coinInfo = {
-                name: i.CoinInfo.Name,
-                fullName: i.CoinInfo.FullName,
-                imageUrl: i.CoinInfo.ImageUrl
-              };
-              coin.push(coinInfo)
-            })
-
-            this.fetchPrice(coin)
-          })
-          .catch(err => {
-            throw err
-          })
-      },
-      fetchPrice(data) { //look up the price of coins
-        let allName = "";
-
-        data.forEach(i => {
-          allName += `${i.name},`;
-        })
-
-        let url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${allName}&tsyms=USD`;
-        fetch(url)
-          .then(res => res.json())
-          .then(result => {
-            data.forEach((value) => {
-              let name = value.name;
-              let priceInfo = result.DISPLAY[name].USD;
-              value.priceInfo = priceInfo;
-            })
-            this.coins = data;
-          })
-      }
     },
     created() { 
       //get data
