@@ -66,8 +66,9 @@
           })
       }
     },
-    created() { //fetch top coins on page load
-      this.fetchTopCoins()
+    created() { 
+      //get data
+      this.$store.dispatch('fetchData')
     }
   }
 </script>
