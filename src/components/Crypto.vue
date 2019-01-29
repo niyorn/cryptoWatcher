@@ -22,20 +22,21 @@
       "Header": Search,
       CryptoItem
     },
-    data() {
-      return {
-        coins: []
+    methods: {
+      fetchData() {        
+        this.$store.dispatch('fetchData')
+      },
+      getData() {
+        return this.$store.getters('coins')
       }
     },
-    methods: {
+    computed: {
+      coins() {
+        return this.$store.state.coins
+      }
     },
-    created() { 
-      //get data
-      this.$store.dispatch('fetchData')
-      .then(()=>{//store data
-        const data = this.$store.state.coins
-        this.coins = data
-      })
+    created() {
+      this.fetchData()
     }
   }
 </script>

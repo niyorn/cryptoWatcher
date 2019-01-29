@@ -29,9 +29,9 @@
         props: {
             name: String,
             imgUrl: String,
-            price: String || Number,
+            price: Number,
             change: {
-                type: String || Number,
+                type: Number,
             }
         },
         data() {
