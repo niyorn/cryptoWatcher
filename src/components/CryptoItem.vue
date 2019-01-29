@@ -9,14 +9,16 @@
         </div>
         <div class="price-container">
             <span class="label">price</span>
-            <span class="price">{{price}}</span>
+            <span class="price">
+               ${{convertToDecimal(price)}}
+            </span>
         </div>
         <div class="change-container">
             <div class="change change-24h">
                 <span class="label">24h change</span>
                 <span class="change-percentage" v-bind:class="[changeStatus]">
                     {{checkChange}}
-                    {{change}}%
+                    {{convertToDecimal(change)}}%
                 </span>
             </div>
         </div>
@@ -40,9 +42,11 @@
             }
         },
         computed: {
+            convertDecimal: function(price){
+                return price.toFixed(4)
+            },
             checkChange() { //Check to see if the changes are positive or negative
-                let change = Number(this.change);
-
+                let change = this.change
                 if (change < 0) {
                     this.changeStatus = "negative";
                 } else if (change > 0) {
@@ -50,6 +54,11 @@
                 } else {
                     this.changeStatus = "neutral";
                 }
+            }
+        },
+        methods: {
+            convertToDecimal(price) {
+                return price.toFixed(3)
             }
         }
 
@@ -105,6 +114,7 @@
 
         .price {
             font-size: 1.7em;
+            color: rgb(255, 186, 100);
 
             @media screen and (min-width: 30rem) {
                 font-size: 2.7rem;
@@ -141,7 +151,7 @@
                 }
 
                 &.neutral {
-                    color: var(--neutral-chage);
+                    color: var(--neutral-change);
                 }
 
                 @media screen and (min-width: 30rem) {
