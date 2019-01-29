@@ -1,6 +1,6 @@
 <template>
   <main class="container">
-    <Header />
+    <Header @search='search'/>
     <section class="crypto-container">
       <CryptoItem v-for="coin in coins" v-bind:key="coin.id" 
         v-bind:name="coin.name" 
@@ -22,18 +22,39 @@
       "Header": Search,
       CryptoItem
     },
+    data(){
+      return {
+        data: []
+      }
+    },
     methods: {
       fetchData() {        
         this.$store.dispatch('fetchData')
       },
       getData() {
         return this.$store.getters('coins')
+      },
+      search(value) {
+
+        // const data = 
+        const data =  this.coins.filter(item=> {
+          //Set everything to lowercase so that search will go
+          //through every item
+          return item.name.toLowerCase().includes(value.toLowerCase())
+        })      
+        
+        this.updateValue(data)
+        },
+      updateValue(value){
+        this.$store.dispatch('updateValue', value)
       }
     },
     computed: {
       coins() {
-        return this.$store.state.coins
+        this.data = this.$store.state.coins
+        return this.data
       }
+
     },
     created() {
       this.fetchData()

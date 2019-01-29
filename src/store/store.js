@@ -34,10 +34,13 @@ export default new Vuex.Store({
       })
       
       action.commit('storeCoins',coins)
+    },
+
+    updateValue(action, value) {
+      action.commit('storeCoins', value)
     }
   },
-
-
+  
   mutations: {
     storeCoins (state, coins){
       state.coins = coins
