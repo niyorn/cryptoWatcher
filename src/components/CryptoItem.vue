@@ -1,5 +1,5 @@
 <template>
-    <transition name="slide-fade">
+    <transition name="slide-fade" mode="in-out">
         <article class="cryptoItem">
             <div class="image-container">
                 <img v-bind:src="imgUrl" alt="">
@@ -162,12 +162,19 @@
 
     /* Enter and leave animations can use different */
     /* durations and timing functions.              */
-    .slide-fade-enter-active {
+    .slide-fade-enter-active, .slide-fade-leave-active{
         transition: all 0.4s ease-in-out;
     }
 
-    .slide-fade-enter      {
+    .slide-fade-enter{
         transform: translateY(4rem);
         opacity: 0;
     }
+
+    .slide-fade-leave-to {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+
 </style>

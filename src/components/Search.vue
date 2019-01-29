@@ -11,7 +11,7 @@
                 </g>
             </svg>
         </button>
-        <button v-show="search" v-on:click="search = false" class="search-button close">X</button>
+        <button v-show="search" v-on:click="searchClose" class="search-button close">X</button>
         <form v-show="search" class="search">
             <label for="search-input">Search</label>
             <input v-model="searchCrypto" v-on:input="filterList($event.target.value)" id="search-input" autofocus type="text" placeholder="Search: Bitcoin, Ethereum etc...">
@@ -34,8 +34,15 @@
                 this.$emit('search', value)
                 
                 if(value == ""){
-                    this.$store.dispatch('fetchData')
+                   this.fetchData()
                 }
+            },
+            fetchData() {
+                 this.$store.dispatch('fetchData')
+            },
+            searchClose() {
+                this.search = false
+                this.fetchData()
             }
         },
         computed: {
