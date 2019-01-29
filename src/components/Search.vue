@@ -37,13 +37,14 @@
         flex-wrap: wrap;
         align-items: center;
         position: fixed;
+        position: sticky;
         width: 100%;
         top: 0;
         z-index: 2;
         background-color: var(--background-color);
         color: white;
         font-size: 2em;
-        padding: 0.7rem 1.4rem;
+        padding: 0 1.4rem;
 
         .logo {
             display: block;

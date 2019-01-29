@@ -44,7 +44,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
   .container {
-    padding-top: 6rem;
     background-color: var(--background-color);
   }
 

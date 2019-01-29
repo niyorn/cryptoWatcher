@@ -28,5 +28,6 @@ html, body{
   height: 100%;
   scroll-behavior: smooth;
   font-family: sans-serif;
+  background-color: var(--background-color);
 }
 </style>
