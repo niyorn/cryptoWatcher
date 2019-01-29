@@ -1,28 +1,30 @@
 <template>
-    <article class="cryptoItem">
-        <div class="image-container">
-            <img v-bind:src="imgUrl" alt="">
-        </div>
-        <div class="name-container">
-            <span class="label">name</span>
-            <h2>{{name}}</h2>
-        </div>
-        <div class="price-container">
-            <span class="label">price</span>
-            <span class="price">
-               ${{convertToDecimal(price)}}
-            </span>
-        </div>
-        <div class="change-container">
-            <div class="change change-24h">
-                <span class="label">24h change</span>
-                <span class="change-percentage" v-bind:class="[changeStatus]">
-                    {{checkChange()}}
-                    {{convertToDecimal(change)}}%
+    <transition name="slide-fade">
+        <article class="cryptoItem">
+            <div class="image-container">
+                <img v-bind:src="imgUrl" alt="">
+            </div>
+            <div class="name-container">
+                <span class="label">name</span>
+                <h2>{{name}}</h2>
+            </div>
+            <div class="price-container">
+                <span class="label">price</span>
+                <span class="price">
+                    ${{convertToDecimal(price)}}
                 </span>
             </div>
-        </div>
-    </article>
+            <div class="change-container">
+                <div class="change change-24h">
+                    <span class="label">24h change</span>
+                    <span class="change-percentage" v-bind:class="[changeStatus]">
+                        {{checkChange()}}
+                        {{convertToDecimal(change)}}%
+                    </span>
+                </div>
+            </div>
+        </article>
+    </transition>
 </template>
 
 <script>
@@ -41,13 +43,12 @@
                 changeStatus: ""
             }
         },
-        computed: {
-        },
+        computed: {},
         methods: {
             convertToDecimal(price) {
                 return price.toFixed(3)
             },
-             checkChange() { //Check to see if the changes are positive or negative
+            checkChange() { //Check to see if the changes are positive or negative
                 let change = this.change
 
                 if (change < 0) {
@@ -157,5 +158,16 @@
                 }
             }
         }
+    }
+
+    /* Enter and leave animations can use different */
+    /* durations and timing functions.              */
+    .slide-fade-enter-active {
+        transition: all 0.4s ease-in-out;
+    }
+
+    .slide-fade-enter      {
+        transform: translateY(4rem);
+        opacity: 0;
     }
 </style>
