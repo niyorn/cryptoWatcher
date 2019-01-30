@@ -56,7 +56,6 @@ export default new Vuex.Store({
     },
 
     updateCoins(state, coins) {
-      console.log(coins)
       state.coins = coins
     }
   }

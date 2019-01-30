@@ -22,7 +22,7 @@
     },
     data() {
       return {
-        apiPath: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=",
+        apiPath: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=",
         apiPage: 1
 
       }
@@ -61,7 +61,7 @@
         const _self = this
         const options = {
           root: null,
-          rootMargin: "400px 0px"
+          rootMargin: "700px 0px"
         }
 
         const observer = new IntersectionObserver(handleIntersection, options)
