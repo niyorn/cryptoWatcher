@@ -24,7 +24,6 @@
     },
     data(){
       return {
-        data: []
       }
     },
     methods: {
@@ -51,8 +50,8 @@
     },
     computed: {
       coins() {
-        this.data = this.$store.state.coins
-        return this.data
+        const coins = this.$store.state.coins
+        return coins
       }
 
     },
