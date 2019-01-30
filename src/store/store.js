@@ -11,9 +11,9 @@ export default new Vuex.Store({
 
   actions: {
 
-    fetchData() {
-      const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1'
-      fetch(url)
+    fetchData(action, path) {
+      const url = path
+      const data =  fetch(url)
       .then(res => res.json())
       .then(result => {
         this.dispatch('transformData', result)
@@ -36,14 +36,28 @@ export default new Vuex.Store({
       action.commit('storeCoins',coins)
     },
 
+    addCoins(action, path) {
+      const data = this.dispatch('fetchData', path)
+      data.then(value=> {
+        action.commit('storeCoins', value)
+      })
+    },
+
     updateValue(action, value) {
-      action.commit('storeCoins', value)
+      action.commit('updateCoins', value)
     }
   },
   
   mutations: {
-    storeCoins (state, coins){
+    storeCoins(state, coins) {
+      for(let coin of coins) {
+        state.coins.push(coin)
+      }
+    },
+
+    updateCoins(state, coins) {
+      console.log(coins)
       state.coins = coins
     }
-  },
+  }
 })

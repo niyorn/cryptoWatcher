@@ -1,14 +1,12 @@
 <template>
   <main class="container">
-    <Header @search='search'/>
+    <Header @search='search' />
     <section class="crypto-container">
-      <CryptoItem v-for="coin in coins" v-bind:key="coin.id" 
-        v-bind:name="coin.name" 
-        v-bind:imgUrl="coin.image"
-        v-bind:price="coin.price" 
-        v-bind:change="coin.change">
+      <CryptoItem v-for="coin in coins" v-bind:key="coin.id" v-bind:name="coin.name" v-bind:imgUrl="coin.image"
+        v-bind:price="coin.price" v-bind:change="coin.change">
       </CryptoItem>
     </section>
+    <div class="observer"></div>
   </main>
 </template>
 
@@ -22,12 +20,15 @@
       "Header": Search,
       CryptoItem
     },
-    data(){
+    data() {
       return {
+        apiPath : "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=",
+        apiPage : 1
+
       }
     },
     methods: {
-      fetchData() {        
+      fetchData() {
         this.$store.dispatch('fetchData')
       },
       getData() {
@@ -36,27 +37,60 @@
       search(value) {
 
         // const data = 
-        const data =  this.coins.filter(item=> {
+        const data = this.coins.filter(item => {
           //Set everything to lowercase so that search will go
           //through every item
           return item.name.toLowerCase().includes(value.toLowerCase())
-        })      
-        
+        })
+
         this.updateValue(data)
-        },
-      updateValue(value){
+      },
+      updateValue(value) {
         this.$store.dispatch('updateValue', value)
+      },
+
+      observe() {
+        const _self = this
+        const options = {
+          root: null,
+          rootMargin: "200px 0px"
+        }
+
+        const observer = new IntersectionObserver(handleIntersection, options)
+
+        const target = document.querySelector(".observer")
+
+        observer.observe(target)
+
+        function handleIntersection(entries, observe) {
+          entries.forEach(element => {
+              if(element.isIntersecting) {
+                _self.apiPage++
+                console.log(_self)
+                _self.$store.dispatch('fetchData', _self.url)
+              }
+          });
+        }
       }
     },
     computed: {
       coins() {
         const coins = this.$store.state.coins
         return coins
+      },
+      url() {
+        const path = this.apiPath + this.apiPage
+        return path
       }
 
     },
     created() {
-      this.fetchData()
+      this.$store.dispatch('fetchData', this.url)
+    },
+    mounted() {
+      this.$nextTick(()=>{
+        this.observe()
+      })
     }
   }
 </script>
