@@ -22,8 +22,8 @@
     },
     data() {
       return {
-        apiPath : "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=",
-        apiPage : 1
+        apiPath: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=",
+        apiPage: 1
 
       }
     },
@@ -35,7 +35,15 @@
         return this.$store.getters('coins')
       },
       search(value) {
-
+        console.log(value)
+        const observer = document.querySelector('.observer')
+        if (value) {
+          observer.classList.remove('active')
+          observer.classList.add('inactive')
+        } else {
+          observer.classList.remove('inactive')
+          observer.classList.add('active')
+        }
         // const data = 
         const data = this.coins.filter(item => {
           //Set everything to lowercase so that search will go
@@ -53,7 +61,7 @@
         const _self = this
         const options = {
           root: null,
-          rootMargin: "200px 0px"
+          rootMargin: "400px 0px"
         }
 
         const observer = new IntersectionObserver(handleIntersection, options)
@@ -64,11 +72,11 @@
 
         function handleIntersection(entries, observe) {
           entries.forEach(element => {
-              if(element.isIntersecting) {
-                _self.apiPage++
-                console.log(_self)
-                _self.$store.dispatch('fetchData', _self.url)
-              }
+            if (element.isIntersecting) {
+              _self.apiPage++
+              console.log(_self)
+              _self.$store.dispatch('fetchData', _self.url)
+            }
           });
         }
       }
@@ -88,7 +96,7 @@
       this.$store.dispatch('fetchData', this.url)
     },
     mounted() {
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.observe()
       })
     }
@@ -110,5 +118,13 @@
       padding: 1.7rem;
       grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
     }
+  }
+
+  .observer.inactive {
+    display: none;
+  }
+
+  .observer.active {
+    display: block;
   }
 </style>
