@@ -6,7 +6,11 @@
         v-bind:price="coin.price" v-bind:change="coin.change">
       </CryptoItem>
     </section>
-    <div class="observer"></div>
+    <div class="observer">
+      <div class="loader"></div>
+      <div class="loader"></div>
+      <div class="loader"></div>
+    </div>
   </main>
 </template>
 
@@ -35,7 +39,6 @@
         return this.$store.getters('coins')
       },
       search(value) {
-        console.log(value)
         const observer = document.querySelector('.observer')
         if (value) {
           observer.classList.remove('active')
@@ -74,7 +77,6 @@
           entries.forEach(element => {
             if (element.isIntersecting) {
               _self.apiPage++
-              console.log(_self)
               _self.$store.dispatch('fetchData', _self.url)
             }
           });
@@ -120,11 +122,42 @@
     }
   }
 
-  .observer.inactive {
-    display: none;
+  .observer {
+    display: flex;
+    padding: 2rem;
+    justify-content: center;
+
+    .loader {
+      height: 6rem;
+      width: 1rem;
+      margin: 0 1rem;
+      background-color: #ffba64;
+      animation: loading 1s alternate infinite ease-in-out;
+
+      &:nth-of-type(2) {
+        animation-delay: 0.4s;
+      }
+
+      &:nth-of-type(3) {
+        animation-delay: 0.8s;
+      }
+    }
+
+
+    &.inactive {
+       display: none;
+    }
+
+    &.active {
+      display: block;
+    }
+
+    @keyframes loading {
+      to {
+        transform: scaleY(0.4);
+      }
+    }
   }
 
-  .observer.active {
-    display: block;
-  }
+
 </style>
