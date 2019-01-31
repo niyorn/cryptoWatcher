@@ -16,6 +16,7 @@ export default new Vuex.Store({
       const data =  fetch(url)
       .then(res => res.json())
       .then(result => {
+        console.log(result)
         this.dispatch('transformData', result)
       })
     },
@@ -29,7 +30,7 @@ export default new Vuex.Store({
         change: i.market_cap_change_percentage_24h,
         image: i.image,
         volume: i.total_volume,
-        price: i.current_price
+        price: i.current_price,
         }
       })
       

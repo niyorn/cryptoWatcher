@@ -2,8 +2,12 @@
   <main class="container">
     <Header @search='search' />
     <section class="crypto-container">
-      <CryptoItem v-for="coin in coins" v-bind:key="coin.id" v-bind:name="coin.name" v-bind:imgUrl="coin.image"
-        v-bind:price="coin.price" v-bind:change="coin.change">
+      <CryptoItem v-for="coin in coins" v-bind:key="coin.id" 
+        v-bind:name="coin.name" 
+        v-bind:imgUrl="coin.image"
+        v-bind:price="coin.price" 
+        v-bind:change="coin.change"
+        v-bind:rank="coin.rank">
       </CryptoItem>
     </section>
     <div class="observer">

@@ -23,6 +23,9 @@
                     </span>
                 </div>
             </div>
+            <div class="rank-container">
+                <span class="rank">{{rank}}</span>
+            </div>
         </article>
     </transition>
 </template>
@@ -36,7 +39,8 @@
             price: Number,
             change: {
                 type: Number,
-            }
+            },
+            rank: Number
         },
         data() {
             return {
@@ -74,6 +78,8 @@
         grid-template-columns: 1fr 2fr;
         grid-gap: 1rem;
         padding: 1rem;
+        position: relative;
+        z-index: 0;
     }
 
     .label {
@@ -151,6 +157,24 @@
                     font-size: 2em;
                 }
             }
+        }
+    }
+
+    .rank-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: -1;
+
+        .rank {
+            font-size: 12em;
+            color: rgba(0,0,0,0.06);
+            font-weight: bold;
         }
     }
 
