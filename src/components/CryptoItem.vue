@@ -74,12 +74,6 @@
         grid-template-columns: 1fr 2fr;
         grid-gap: 1rem;
         padding: 1rem;
-
-        &:hover {
-            background-color: var(--hover-background-color);
-            color: black;
-            cursor: pointer;
-        }
     }
 
     .label {
