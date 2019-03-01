@@ -3,7 +3,7 @@
 ![Cryptowatcher](readme-assets/cryptowatcher.gif)
 With CryptoWatcher you're able to see the 24h % changes of the top volume trading coins.
 
-Link to application: https://cryptowatcher.netlify.com/dist/index.html
+Link to application: https://crypto-watcher.netlify.com
 
 ## Getting started
 
