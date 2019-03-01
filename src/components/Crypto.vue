@@ -43,6 +43,7 @@
         return this.$store.getters('coins')
       },
       search(value) {
+        console.log(value)
         const observer = document.querySelector('.observer')
         if (value) {
           observer.classList.remove('active')
@@ -153,7 +154,7 @@
     }
 
     &.active {
-      display: block;
+      display: flex;
     }
 
     @keyframes loading {

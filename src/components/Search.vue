@@ -42,7 +42,9 @@
             },
             searchClose() {
                 this.search = false
+                this.searchCrypto = ''
                 this.fetchData()
+                this.$emit('search', false) //to reactive the observer component
             }
         },
         computed: {
