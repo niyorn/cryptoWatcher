@@ -173,7 +173,7 @@
 
         .rank {
             font-size: 12em;
-            color: rgba(0,0,0,0.06);
+            color: rgba(0,0,0,0.12);
             font-weight: bold;
         }
     }
