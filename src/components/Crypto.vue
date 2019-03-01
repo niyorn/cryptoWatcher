@@ -122,7 +122,7 @@
 
     @media screen and (min-width: 30rem) {
       padding: 1.7rem;
-      grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     }
   }
 
