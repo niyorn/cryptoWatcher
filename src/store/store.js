@@ -46,6 +46,10 @@ export default new Vuex.Store({
 
     updateValue(action, value) {
       action.commit('updateCoins', value)
+    },
+
+    resetState(action) {
+      action.commit('clearState')
     }
   },
   
@@ -58,6 +62,10 @@ export default new Vuex.Store({
 
     updateCoins(state, coins) {
       state.coins = coins
+    },
+
+    clearState(state) {
+      state.coins = []
     }
   }
 })

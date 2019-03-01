@@ -33,8 +33,9 @@
             filterList(value) {
                 this.$emit('search', value)
                 
-                if(value == ""){
-                   this.fetchData()
+                if(value === ""){
+                    this.$store.dispatch('resetState')
+                    this.fetchData()
                 }
             },
             fetchData() {
@@ -43,6 +44,7 @@
             searchClose() {
                 this.search = false
                 this.searchCrypto = ''
+                this.$store.dispatch('resetState')
                 this.fetchData()
                 this.$emit('search', false) //to reactive the observer component
             }
