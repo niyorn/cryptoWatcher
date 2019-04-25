@@ -1,6 +1,6 @@
 <template>
     <transition name="slide-fade" mode="in-out">
-        <article class="cryptoItem">
+        <a v-bind:href="href" class="cryptoItem" rel="noopener noreferrer" target="_blank">
             <div class="image-container">
                 <img v-bind:src="imgUrl" alt="">
             </div>
@@ -26,7 +26,7 @@
             <div class="rank-container">
                 <span class="rank">{{rank}}</span>
             </div>
-        </article>
+        </a>
     </transition>
 </template>
 
@@ -40,14 +40,20 @@
             change: {
                 type: Number,
             },
-            rank: Number
+            rank: Number,
+            symbol: String
         },
         data() {
             return {
                 changeStatus: ""
             }
         },
-        computed: {},
+        computed: {
+            href() {
+                const url = `https://www.cryptocompare.com/coins/${this.symbol}/overview`
+                return url
+            }
+        },
         methods: {
             convertToDecimal(price) {
                 return price.toFixed(3)
@@ -80,6 +86,7 @@
         padding: 1rem;
         position: relative;
         z-index: 0;
+        text-decoration: none;
     }
 
     .label {

@@ -7,7 +7,8 @@
         v-bind:imgUrl="coin.image"
         v-bind:price="coin.price" 
         v-bind:change="coin.change"
-        v-bind:rank="coin.rank">
+        v-bind:rank="coin.rank"
+        v-bind:symbol="coin.symbol">
       </CryptoItem>
     </section>
     <div class="observer">
