@@ -16,18 +16,22 @@
       <div class="loader"></div>
       <div class="loader"></div>
     </div>
+
+    <BackToTop/>
   </main>
 </template>
 
 <script>
   import Search from "./Search.vue";
   import CryptoItem from "./CryptoItem.vue";
+  import BackToTop from "./BackToTop.vue"
 
   export default {
     name: 'Crypto',
     components: {
       "Header": Search,
-      CryptoItem
+      CryptoItem,
+      BackToTop
     },
     data() {
       return {
