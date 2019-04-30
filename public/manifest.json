@@ -1,6 +1,8 @@
 {
   "name": "cryptoWatcher",
   "short_name": "cryptoWatcher",
+  "background_color": "#15151f",
+  "theme_color": "#15151f",
   "icons": [
     {
       "src": "/img/icons/logo-small.png",
@@ -13,8 +15,6 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "#15151f",
-  "theme_color": "#15151f"
+  "start_url": "/",
+  "display": "standalone"
 }
