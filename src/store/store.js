@@ -16,7 +16,6 @@ export default new Vuex.Store({
       const data =  fetch(url)
       .then(res => res.json())
       .then(result => {
-        console.log(result)
         this.dispatch('transformData', result)
       })
     },
